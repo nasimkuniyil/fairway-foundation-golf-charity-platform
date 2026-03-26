@@ -7,13 +7,14 @@ import HomePageHeader from "@/components/HomePageHeader";
 function HomePage() {
   const [profiles, setProfiles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { user } = useAuthStore();
+  const { user, profile } = useAuthStore();
 
   useEffect(() => {
     // Adding a slight delay or depending on user state ensures the session is completely solid
     if (user?.id) {
       getProfiles();
     }
+    console.log("profile : ", profile);
   }, [user]);
 
   async function getProfiles() {
@@ -39,11 +40,14 @@ function HomePage() {
       <div className="pt-24 min-h-screen bg-slate-50 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
           <h1 className="text-3xl font-bold mb-6 text-slate-800">
-            Welcome back to the Fairway Foundation!
+            Hi {profile?.full_name},
           </h1>
           <h2 className="text-xl text-slate-500 mb-4">
-            Your User ID: {user?.id}
+            Welcome back to the Fairway Foundation!
           </h2>
+          <p className="text-sm text-slate-500 mb-4">
+            Your User ID: {user?.id}
+          </p>
 
           {loading ? (
             <p>Loading your data...</p>

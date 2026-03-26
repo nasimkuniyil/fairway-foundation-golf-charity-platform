@@ -3,7 +3,7 @@ import LandingPage from "@/pages/landingPage/LandingPage";
 import LoginPage from "./pages/auth/Login";
 import { Toaster } from "sonner";
 import SignupPage from "./pages/auth/Singup";
-import HomePage from "./pages/HomePage";
+import HomePage from "./pages/homePage.jsx/HomePage";
 import ProtectedRoute from "./components/ProtectedRoutes";
 import { useAuthStore } from "./store/authStore";
 import { useEffect } from "react";

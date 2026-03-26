@@ -5,6 +5,7 @@ import { toast } from "sonner";
 
 export const useAuthStore = create((set, get) => ({
   user: null,
+  profile: null,
   session: null,
   loading: true,
   isAdmin: false,
@@ -69,33 +70,17 @@ export const useAuthStore = create((set, get) => ({
     if (!userId) return;
 
     try {
-      // Fetch profile (for is_admin)
-      const { data: profile } = await supabase
+      console.log("Fetching user data for user:", userId);
+
+      // Fetch user
+      const { data: userProfile } = await supabase
         .from("profiles")
-        .select("is_admin")
+        .select("*")
         .eq("id", userId)
         .single();
 
-      // Fetch active subscription
-      const { data: sub } = await supabase
-        .from("subscriptions")
-        .select("*")
-        .eq("user_id", userId)
-        .eq("status", "active")
-        .single();
-
-      // Fetch charity preference
-      const { data: charityPref } = await supabase
-        .from("user_charity_preferences")
-        .select("charity_id, contribution_percent")
-        .eq("user_id", userId)
-        .single();
-
       set({
-        isAdmin: profile?.is_admin || false,
-        subscription: sub || null,
-        selectedCharity: charityPref?.charity_id || null,
-        charityPercent: charityPref?.contribution_percent || 10,
+        profile: userProfile || null,
       });
     } catch (error) {
       console.error("Error fetching user data:", error.message);
