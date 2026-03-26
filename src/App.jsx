@@ -1,13 +1,19 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import LandingPage from '@/pages/landingPage/LandingPage';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LandingPage from "@/pages/landingPage/LandingPage";
+import LoginPage from "./pages/auth/Login";
+import { Toaster } from "sonner";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <Toaster position="top-right" richColors />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
