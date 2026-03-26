@@ -3,68 +3,112 @@ import { toast } from "sonner";
 import supabase from "@/lib/supabaseClient";
 import { useAuthStore } from "@/store/authStore";
 import HomePageHeader from "@/components/HomePageHeader";
+import Box from "@/components/Box";
 
 function HomePage() {
-  const [profiles, setProfiles] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const { user, profile } = useAuthStore();
+  const { profile } = useAuthStore();
+  const [winnings, setWinnings] = useState([
+    { id: 1, amount: 20, draw: "october 2025" },
+    { id: 2, amount: 40, draw: "november 2025" },
+    { id: 3, amount: 50, draw: "december 2025" },
+  ]);
 
-  useEffect(() => {
-    // Adding a slight delay or depending on user state ensures the session is completely solid
-    if (user?.id) {
-      getProfiles();
-    }
-    console.log("profile : ", profile);
-  }, [user]);
+  const scores = [
+    {
+      id: 1,
+      score: 34,
+      course: "Pine valley GC",
+      date: "Oct 12, 2025",
+    },
+    {
+      id: 2,
+      score: 20,
+      course: "Pine valley GC",
+      date: "Oct 12, 2025",
+    },
+    {
+      id: 3,
+      score: 28,
+      course: "Pine valley GC",
+      date: "Oct 12, 2025",
+    },
+  ];
 
-  async function getProfiles() {
-    setLoading(true);
-    const { data, error } = await supabase.from("profiles").select("*");
-
-    if (error) {
-      console.log("error :", error);
-      toast.error(error.message);
-      setLoading(false);
-      return;
-    }
-
-    setProfiles(data || []);
-    setLoading(false);
-    console.log("hey :", data);
-  }
+  console.log("profile home: ", profile);
 
   return (
     <>
-      {/* We can temporarily use the landing page header just to give it a layout! */}
       <HomePageHeader />
-      <div className="pt-24 min-h-screen bg-slate-50 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-          <h1 className="text-3xl font-bold mb-6 text-slate-800">
-            Hi {profile?.full_name},
-          </h1>
-          <h2 className="text-xl text-slate-500 mb-4">
-            Welcome back to the Fairway Foundation!
-          </h2>
-          <p className="text-sm text-slate-500 mb-4">
-            Your User ID: {user?.id}
-          </p>
-
-          {loading ? (
-            <p>Loading your data...</p>
-          ) : profiles.length === 0 ? (
-            <p className="text-red-500 bg-red-50 p-4 rounded-lg">
-              No profiles found! (Check your RLS Policies in Supabase)
-            </p>
-          ) : (
-            <ul className="space-y-3">
-              {profiles.map((profile) => (
-                <li key={profile.id} className="p-4 bg-slate-100 rounded-lg">
-                  <span className="font-bold">{profile?.full_name}</span> -{" "}
-                  {profile.role || "Member"}
-                </li>
-              ))}
-            </ul>
-          )}
+      <div className="pt-24 min-h-screen px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold text-slate-800">
+              Hi{" "}
+              <span className="text-brand-orange-dark">
+                {profile?.full_name}
+              </span>
+              ,
+            </h1>
+            <h2 className="text-xl text-slate-500 mb-4">
+              Welcome back to the Fairway Foundation!
+            </h2>
+          </div>
+          <div className="flex gap-4 ">
+            <Box>
+              <div className="mb-4">
+                <h3 className="text-base lg:text-lg font-bold text-slate-800">
+                  Recent score
+                </h3>
+              </div>
+              <ul className="space-y-3">
+                {scores?.map((score) => (
+                  <li
+                    key={score.id}
+                    className="w-full bg-brand-purple-soft p-3 flex gap-3 rounded-full"
+                  >
+                    <h2 className="rounded-full w-10 h-10 flex items-center justify-center font-bold bg-white">
+                      {score.score}
+                    </h2>
+                    <div>
+                      <h3 className="text-sm font-semibold text-slate-800">
+                        {score.course}
+                      </h3>
+                      <p className="text-xs text-slate-500">{score.date}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </Box>
+            <Box>
+              <div className="mb-4">
+                <h3 className="text-base lg:text-lg font-bold text-slate-800">
+                  Your winnings
+                </h3>
+              </div>
+              <div>
+                {winnings.length == 0 ? (
+                  <p className="text-center text-slate-500">No winnings yet</p>
+                ) : (
+                  <div>
+                    <div className="mb-4">
+                      <p className="text-slate-500">Total winnings</p>
+                      <h1 className="text-5xl font-extrabold text-slate-800">
+                        ${winnings.reduce((a, b) => a + b.amount, 0)}
+                      </h1>
+                    </div>
+                    <ul className="">
+                      {winnings?.map((w) => (
+                        <li key={w.id} className="flex justify-between">
+                          <p className="text-slate-500">{w.draw}</p>
+                          <p className="text-brand-teal-dark">${w.amount} +</p>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </Box>
+          </div>
         </div>
       </div>
     </>
