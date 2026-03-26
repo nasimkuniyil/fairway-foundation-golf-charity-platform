@@ -93,7 +93,7 @@ export default function LoginPage() {
               <p className="text-center">
                 Do n't have an account?{" "}
                 <CustomLink
-                  href="/signup"
+                  to="/signup"
                   className="text-brand-orange-dark hover:underline"
                 >
                   Sign up
