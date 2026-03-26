@@ -91,7 +91,7 @@ export default function LoginPage() {
             </form>
             <div className="mt-5">
               <p className="text-center">
-                Do n't have an account?{" "}
+                Don't have an account?{" "}
                 <CustomLink
                   to="/signup"
                   className="text-brand-orange-dark hover:underline"
