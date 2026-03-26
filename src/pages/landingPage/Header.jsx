@@ -34,7 +34,7 @@ export default function Header() {
           </div>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden lg:flex space-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -49,14 +49,14 @@ export default function Header() {
           <div className="flex items-center space-x-4">
             <CustomLink
               to="/login"
-              className="hidden md:flex items-center justify-center px-6 py-2.5 text-sm font-bold rounded-full text-white bg-brand-orange-dark tracking-wider hover:bg-brand-orange-light hover:shadow-lg transition-all duration-300"
+              className="hidden lg:flex items-center justify-center px-6 py-2.5 text-sm font-bold rounded-full text-white bg-brand-orange-dark tracking-wider hover:bg-brand-orange-light hover:shadow-lg transition-all duration-300"
             >
               Join the Club
             </CustomLink>
 
             {/* Mobile menu button */}
             <button
-              className="md:hidden text-slate-500 hover:text-brand-orange-dark p-2 transition-colors"
+              className="lg:hidden text-slate-500 hover:text-brand-orange-dark p-2 transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -89,7 +89,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out bg-white border-b border-slate-200 ${
+        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out bg-white border-b border-slate-200 ${
           isMobileMenuOpen
             ? "h-screen opacity-100"
             : "max-h-0 opacity-0 border-transparent"
