@@ -41,7 +41,7 @@ export default function Hero() {
 
       <div className="hidden lg:block mr-20">
         <div className="relative h-96 aspect-4/3 rotate-3 bg-white shadow-lg rounded-3xl overflow-hidden">
-          <img src="/hero-img.jpg" alt="Hero" className="object-cover" />
+          <img src="/hero-img.jpg" alt="Hero" className="object-cover h-full" />
           <div className="absolute bottom-0 left-0 w-full">
             <div className="bg-white px-4 py-2 rounded-3xl mx-auto w-fit mb-4">
               <p className="text-xs text-brand-purple-dark font-semibold">Winner</p>

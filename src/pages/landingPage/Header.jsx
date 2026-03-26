@@ -108,7 +108,7 @@ export default function Header() {
           ))}
           <div className="pt-2">
             <CustomLink
-              to="#pricing"
+              to="/login"
               onClick={() => setIsMobileMenuOpen(false)}
               className="flex items-center justify-center w-full px-6 py-3.5 text-base font-bold rounded-full text-white bg-brand-orange-dark tracking-wider hover:bg-brand-orange-light shadow-md transition-all duration-300"
             >
