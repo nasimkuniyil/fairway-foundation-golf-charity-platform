@@ -135,7 +135,15 @@ export const useAuthStore = create((set, get) => ({
 
       if (error) throw error;
 
-      toast.success("Account created! Please check your email to confirm.");
+      const { error: profileError } = await supabase.from("profiles").insert({
+        id: data.user.id,
+        full_name: fullName,
+        role: "subscriber",
+      });
+
+      if (profileError) throw profileError;
+
+      toast.success("Account created!");
     } catch (error) {
       console.error("Signup error:", error.message);
       toast.error(error.message);
@@ -143,7 +151,7 @@ export const useAuthStore = create((set, get) => ({
     }
   },
 
-  signOut: async () => {
+  logout: async () => {
     try {
       await supabase.auth.signOut();
       set({
@@ -153,9 +161,9 @@ export const useAuthStore = create((set, get) => ({
         subscription: null,
         selectedCharity: null,
       });
-      toast.success("Signed out successfully.");
+      toast.success("Logged out successfully.");
     } catch (error) {
-      toast.error("Error signing out.");
+      toast.error("Error logging out.");
     }
   },
 
