@@ -30,7 +30,7 @@ export default function About() {
             <h3 className="text-3xl sm:text-4xl font-sans font-bold text-slate-900 mb-6 text-balance">
               Building Character Through The Game of Golf
             </h3>
-            <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+            <p className="text-sm md:text-lg text-slate-600 mb-8 leading-relaxed">
               We believe that the values inherent in golf — honesty, integrity,
               and perseverance — are the same values that build strong
               communities. The Fairway Foundation channels the passion of
@@ -53,7 +53,7 @@ export default function About() {
                     />
                   </svg>
                 </div>
-                <div className="ml-4">
+                <div className="ml-4 text-sm md:text-base">
                   <h4 className="text-xl font-bold text-slate-900">
                     Community Access
                   </h4>
