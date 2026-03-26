@@ -1,7 +1,5 @@
-"use client";
-
 import { useState, useEffect } from "react";
-import Link from "react-router-dom";
+import { Link } from "react-router-dom";
 import CustomLink from "@/components/ui/CustomLink";
 
 export default function Header() {

@@ -1,3 +1,4 @@
+import Hero from "@/components/Hero";
 import Header from "@/pages/landingPage/Header";
 
 function LandingPage() {
@@ -5,7 +6,7 @@ function LandingPage() {
     <>
       <Header />
       <section>
-        <h1>Landing page</h1>
+        <Hero />
       </section>
     </>
   );
