@@ -1,1 +1,67 @@
 @import "tailwindcss";
+
+@theme {
+  /* Brand Colors */
+  --color-brand-orange: #ff6b35;
+  --color-brand-orange-light: #ff8b61;
+  --color-brand-orange-soft: #fff0eb;
+  --color-brand-orange-dark: #e55a2b;
+  --color-brand-orange-extra-dark: #a63600;
+
+  --color-brand-teal: #00c4b4;
+  --color-brand-teal-light: #33d0c3;
+  --color-brand-teal-dark: #007b70;
+  --color-brand-teal-soft: #e6f9f7;
+
+  --color-brand-navy: #1a2a44;
+  --color-brand-navy-light: #2c4163;
+  --color-brand-navy-dark: #0e1726;
+
+  --color-brand-purple: #8e4dff;
+  --color-brand-purple-light: #a875ff;
+  --color-brand-purple-dark: #7236db;
+  --color-brand-purple-soft: #f4eeff;
+
+  /* Surface Colors */
+  --color-surface-white: #ffffff;
+  --color-surface-cream: #fffdf9;
+  --color-surface-slate-50: #f8fafc;
+  --color-surface-slate-100: #f1f5f9;
+  --color-surface-slate-800: #1e293b;
+  --color-surface-slate-900: #0f172a;
+
+  /* Border Radius */
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 24px;
+
+  /* Shadows */
+  --shadow-soft: 0 4px 20px -2px rgba(26, 42, 68, 0.08);
+  --shadow-warm: 0 10px 30px -5px rgba(255, 107, 53, 0.15);
+
+  /* Typography */
+  --font-sans: var(--font-plus-jakarta-sans), ui-sans-serif, system-ui;
+  --font-display: var(--font-plus-jakarta-sans), sans-serif;
+  --font-body: var(--font-plus-jakarta-sans), sans-serif;
+}
+
+@layer base {
+  body {
+    @apply antialiased text-slate-800 bg-brand-orange-soft;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-sans text-slate-900;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
