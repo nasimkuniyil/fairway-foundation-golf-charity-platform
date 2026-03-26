@@ -3,7 +3,7 @@ import CustomLink from "@/components/ui/CustomLink";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import supabase from "@/lib/supabaseClient";
+import { useAuthStore } from "@/store/authStore";
 
 export default function SignupPage() {
   const [fullName, setFullName] = useState("");
@@ -11,6 +11,7 @@ export default function SignupPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { signUp } = useAuthStore();
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -22,19 +23,9 @@ export default function SignupPage() {
       return;
     }
 
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-
-    if (error) {
-      console.log("error :", error);
-      toast.error(error.message);
-      return;
-    }
+    await signUp(fullName, email, password);
 
     setLoading(false);
-    console.log("signup data :", data);
     navigate("/home");
   };
   return (

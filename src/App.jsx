@@ -4,17 +4,47 @@ import LoginPage from "./pages/auth/Login";
 import { Toaster } from "sonner";
 import SignupPage from "./pages/auth/Singup";
 import HomePage from "./pages/HomePage";
+import ProtectedRoute from "./components/ProtectedRoutes";
+import { useAuthStore } from "./store/authStore";
+import { useEffect } from "react";
+import AuthRoute from "./components/AuthRoutes";
 
 function App() {
+  const { initializeAuth } = useAuthStore();
+  useEffect(() => {
+    const cleanup = initializeAuth();
+    return cleanup;
+  }, []);
   return (
     <>
       <Toaster position="top-right" richColors />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/home" element={<HomePage />} />
+          <Route
+            path="/login"
+            element={
+              <AuthRoute>
+                <LoginPage />
+              </AuthRoute>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <AuthRoute>
+                <SignupPage />
+              </AuthRoute>
+            }
+          />
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <HomePage />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </>

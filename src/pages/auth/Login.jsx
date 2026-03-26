@@ -4,12 +4,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import supabase from "@/lib/supabaseClient";
+import { useAuthStore } from "@/store/authStore";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuthStore();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -20,19 +22,9 @@ export default function LoginPage() {
       return;
     }
 
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      console.log("error :", error);
-      toast.error(error.message);
-      return;
-    }
+    await login(email, password);
 
     setLoading(false);
-    console.log("login data :", data);
     navigate("/home");
   };
 
