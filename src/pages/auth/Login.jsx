@@ -29,8 +29,8 @@ export default function LoginPage() {
   };
 
   return (
-    <section>
-      <div className="h-screen flex items-center justify-center max-w-5xl mx-auto gap-10 px-4">
+    <section className="w-full">
+      <div className="w-full flex items-center justify-center max-w-5xl mx-auto gap-10 px-4 py-10 my-auto">
         <div className="hidden md:block flex-1">
           <div className="max-w-3/4">
             <h1 className="text-5xl font-black mb-5">

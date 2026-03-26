@@ -9,6 +9,10 @@ import { useAuthStore } from "./store/authStore";
 import { useEffect } from "react";
 import AuthRoute from "./components/AuthRoutes";
 
+import AuthLayout from "./layouts/AuthLayout";
+import LandingLayout from "./layouts/LandingLayout";
+import HomeLayout from "./layouts/HomeLayout";
+
 function App() {
   const { initializeAuth } = useAuthStore();
   useEffect(() => {
@@ -20,31 +24,39 @@ function App() {
       <Toaster position="top-center" richColors />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route
-            path="/login"
-            element={
-              <AuthRoute>
-                <LoginPage />
-              </AuthRoute>
-            }
-          />
-          <Route
-            path="/signup"
-            element={
-              <AuthRoute>
-                <SignupPage />
-              </AuthRoute>
-            }
-          />
-          <Route
-            path="/home"
-            element={
-              <ProtectedRoute>
-                <HomePage />
-              </ProtectedRoute>
-            }
-          />
+          <Route element={<LandingLayout />}>
+            <Route path="/" element={<LandingPage />} />
+          </Route>
+
+          <Route element={<AuthLayout />}>
+            <Route
+              path="/login"
+              element={
+                <AuthRoute>
+                  <LoginPage />
+                </AuthRoute>
+              }
+            />
+            <Route
+              path="/signup"
+              element={
+                <AuthRoute>
+                  <SignupPage />
+                </AuthRoute>
+              }
+            />
+          </Route>
+
+          <Route element={<HomeLayout />}>
+            <Route
+              path="/home"
+              element={
+                <ProtectedRoute>
+                  <HomePage />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
