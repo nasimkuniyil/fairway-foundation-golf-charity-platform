@@ -3,6 +3,7 @@ import CustomLink from "@/components/ui/CustomLink";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import supabase from "@/lib/supabaseClient";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -19,7 +20,20 @@ export default function LoginPage() {
       return;
     }
 
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      console.log("error :", error);
+      toast.error(error.message);
+      return;
+    }
+
     setLoading(false);
+    console.log("login data :", data);
+    navigate("/home");
   };
 
   return (

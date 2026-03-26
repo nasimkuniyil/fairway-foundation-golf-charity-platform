@@ -3,6 +3,7 @@ import CustomLink from "@/components/ui/CustomLink";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import supabase from "@/lib/supabaseClient";
 
 export default function SignupPage() {
   const [fullName, setFullName] = useState("");
@@ -21,7 +22,20 @@ export default function SignupPage() {
       return;
     }
 
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+    if (error) {
+      console.log("error :", error);
+      toast.error(error.message);
+      return;
+    }
+
     setLoading(false);
+    console.log("signup data :", data);
+    navigate("/home");
   };
   return (
     <section>
