@@ -8,7 +8,7 @@ export default function AuthRoute({ children }) {
   // Show loading while checking auth state
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-50 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-emerald-50 to-teal-50 flex items-center justify-center">
         <div className="text-emerald-700 text-xl font-medium">
           Preparing your impact journey...
         </div>
@@ -18,7 +18,7 @@ export default function AuthRoute({ children }) {
 
   // If user is already logged in → redirect to dashboard
   if (user) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/home" replace />;
   }
 
   // Otherwise show login/signup page
